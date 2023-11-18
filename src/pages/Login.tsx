@@ -42,6 +42,7 @@ export function LoginPage() {
         provider: "azure",
         options: {
           scopes: "email profile offline_access",
+          redirectTo: window.location.origin + "/register",
         },
       })
       .then(({ data, error }) => {
