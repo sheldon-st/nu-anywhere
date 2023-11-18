@@ -1,0 +1,55 @@
+// create an interface for a Document based off this example with all properties besides necessary optional
+//  [ abstract, action, agencies, agency_names, body_html_url, cfr_references, citation, comment_url, comments_close_on, correction_of, corrections, dates, disposition_notes, docket_id, docket_ids, dockets, document_number, effective_on, end_page, excerpts, executive_order_notes, executive_order_number, full_text_xml_url, html_url, images, images_metadata, json_url, mods_url, page_length, page_views, pdf_url, president, presidential_document_number, proclamation_number, public_inspection_pdf_url, publication_date, raw_text_url, regulation_id_number_info, regulation_id_numbers, regulations_dot_gov_info, regulations_dot_gov_url, significant, signing_date, start_page, subtype, title, toc_doc, toc_subject, topics, type, volume ]
+export interface IDocument {
+  abstract?: string;
+  action?: string;
+  agencies?: string[];
+  agency_names?: string[];
+  body_html_url: string;
+  cfr_references?: string[];
+  citation?: string;
+  comment_url?: string;
+  comments_close_on?: string;
+  correction_of?: string[];
+  corrections?: string[];
+  dates?: string[];
+  disposition_notes?: string[];
+  docket_id?: string;
+  docket_ids?: string[];
+  dockets?: string[];
+  document_number?: string;
+  effective_on?: string;
+  end_page?: number;
+  excerpts?: string[];
+  executive_order_notes?: string[];
+  executive_order_number?: string;
+  full_text_xml_url?: string;
+  html_url?: string;
+  images?: string[];
+  images_metadata?: string[];
+  json_url?: string;
+  mods_url?: string;
+  page_length?: number;
+  page_views?: number;
+  pdf_url?: string;
+  president?: string;
+  presidential_document_number?: string;
+  proclamation_number?: string;
+  public_inspection_pdf_url?: string;
+  publication_date: string;
+  raw_text_url?: string;
+  regulation_id_number_info?: string[];
+  regulation_id_numbers?: string[];
+  regulations_dot_gov_info?: string[];
+  regulations_dot_gov_url?: string;
+  significant?: boolean;
+  signing_date?: string;
+  start_page?: number;
+  subtype?: string;
+  title?: string;
+  toc_doc?: string;
+  toc_subject?: string;
+  topics?: string[];
+  type?: string;
+  volume?: number;
+}

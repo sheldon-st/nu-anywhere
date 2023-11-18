@@ -1,0 +1,8 @@
+{
+  "IsEncrypted": false,
+  "Values": {
+    "AzureWebJobsStorage": "DefaultEndpointsProtocol=https;AccountName=opendata9a41;AccountKey=KNg7qbZalXTdmmv5mUZDNu+wPwl5rV6MXlPs8D2X0Hbzl4lj2s90Jguy8HF+YmTtoDq3lvbt1l5G+AStuO2YuA==;EndpointSuffix=core.windows.net",
+    "FUNCTIONS_WORKER_RUNTIME": "node",
+    "AzureWebJobsFeatureFlags": "EnableWorkerIndexing"
+  }
+}

@@ -1,0 +1,23 @@
+.ant-table-wrapper {
+  height: 100% !important;
+  overflow: hidden;
+
+  .ant-spin-nested-loading {
+    height: 100%;
+
+    .ant-spin-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 100%;
+
+      .ant-table {
+        height: 100%;
+        overflow: auto;
+      }
+    }
+  }
+}
+
+.table-container {
+}
