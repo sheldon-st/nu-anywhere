@@ -18,6 +18,7 @@ import { DocumentsHome } from "./pages/documents/DocumentsHome";
 import { AgencyDetail } from "./pages/agencies/AgencyDetail";
 import { DocumentDetail } from "./pages/documents/DocumentDetail";
 import { AgencyHome } from "./pages/agencies/AgencyHome";
+import UserRegistration from "./pages/profile/Registration";
 
 function App() {
   return (
@@ -72,6 +73,14 @@ function App() {
                 element={
                   <ProtectedRoute>
                     <Profile />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/register"
+                element={
+                  <ProtectedRoute>
+                    <UserRegistration />
                   </ProtectedRoute>
                 }
               />

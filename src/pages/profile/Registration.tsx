@@ -26,6 +26,8 @@ import { majors, interests } from "../../types";
 import { Loader } from "@googlemaps/js-api-loader";
 
 import posthog from "posthog-js";
+// import stuff needed to navigate to next page on enter from react-router-dom
+import { useNavigate, Navigate } from "react-router-dom";
 
 const loader = new Loader({
   apiKey: "AIzaSyApOv8j1GSr09SLkdAEWObBHkleWvAGB1U",
@@ -37,11 +39,12 @@ const { RangePicker } = DatePicker;
 const { CheckableTag } = Tag;
 
 interface IUserRegistrationProps {
-  setRegistrationComplete: any;
+  setRegistrationCompletes?: any;
 }
 export const UserRegistration: FC<IUserRegistrationProps> = ({
-  setRegistrationComplete,
+  setRegistrationCompletes,
 }) => {
+  const [registrationComplete, setRegistrationComplete] = useState(false);
   const { user } = useAuth();
   const { token } = theme.useToken();
 
@@ -700,10 +703,32 @@ export const UserRegistration: FC<IUserRegistrationProps> = ({
               </Button>
               <Button
                 type="primary"
-                onClick={() => setRegistrationComplete(true)}
+                onClick={() => {
+                  console.log(formData);
+                  // setRegistrationComplete(true);
+                  posthog.identify(user.id, {
+                    $email: user.email,
+                    $name: formData.name,
+                    $username: formData.name,
+                    educationStatus: formData.educationStatus,
+                    graduationYear: formData.graduationYear.format("YYYY"),
+                    major: formData.major.map((major: string) => majors[major]),
+                    location: formData.location,
+                    interests: formData.interests.map(
+                      (interest: string) => interests[interest]
+                    ),
+                    employmentStatus: formData.employmentStatus,
+                    employmentType: formData.employmentType,
+                    employmentDates: formData.employmentDates,
+                    employer: formData.employer,
+                    jobTitle: formData.jobTitle,
+                  });
+                  setRegistrationComplete(true);
+                }}
               >
                 Looks good!
               </Button>
+              {registrationComplete && <Navigate to="/profile" />}
             </Space>
           </Space>
         );

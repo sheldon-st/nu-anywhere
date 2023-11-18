@@ -88,10 +88,7 @@ export function Profile() {
           </Typography.Paragraph>
         </Space>
       ) : (
-        <UserRegistration
-          setRegistrationComplete={handleRegistrationComplete}
-          //user={user}
-        />
+        <div>Placeholder</div>
       )}
     </>
   );
