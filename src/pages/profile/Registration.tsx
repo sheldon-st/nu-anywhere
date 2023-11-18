@@ -33,9 +33,6 @@ const loader = new Loader({
   libraries: ["places", "geocoding"],
 });
 
-const { AutocompleteService } = await loader.importLibrary("places");
-const { Geocoder } = await loader.importLibrary("geocoding");
-
 const { RangePicker } = DatePicker;
 const { CheckableTag } = Tag;
 
@@ -83,6 +80,17 @@ export const UserRegistration: FC<IUserRegistrationProps> = ({
 
   // keep track of validation status for current page of form
   const [currentFormValid, setCurrentFormValid] = useState(false);
+
+  // Wrap the code inside an async function
+  const loadGoogleMaps = async () => {
+    const { AutocompleteService } = await loader.importLibrary("places");
+    const { Geocoder } = await loader.importLibrary("geocoding");
+
+    // Rest of the code...
+  };
+
+  // Call the async function
+  loadGoogleMaps();
 
   /** Geolocation */
   const [_geoLocation, setGeoLocation] = React.useState<{
