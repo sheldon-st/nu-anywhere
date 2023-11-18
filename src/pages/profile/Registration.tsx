@@ -83,17 +83,38 @@ export const UserRegistration: FC<IUserRegistrationProps> = ({
 
   // keep track of validation status for current page of form
   const [currentFormValid, setCurrentFormValid] = useState(false);
+  const [autocompleteService, setAutocompleteService] =
+    useState<google.maps.places.AutocompleteService | null>(null);
+  const [geocodingService, setGeocodingService] =
+    useState<google.maps.Geocoder | null>(null);
 
   // Wrap the code inside an async function
   const loadGoogleMaps = async () => {
-    const { AutocompleteService } = await loader.importLibrary("places");
-    const { Geocoder } = await loader.importLibrary("geocoding");
-
-    // Rest of the code...
+    // Load the Google Maps Platform JS API asynchronously
+    await loader.load();
+    setAutocompleteService(new google.maps.places.AutocompleteService());
+    setGeocodingService(new google.maps.Geocoder());
   };
 
-  // Call the async function
-  loadGoogleMaps();
+  // create new autocomplete service and try browser geolocation on component mount
+  useEffect(() => {
+    const initializeServices = async () => {
+      await loadGoogleMaps();
+    };
+
+    initializeServices();
+  }, []);
+
+  // create new autocomplete service on component mount and try browser geolocation
+  useEffect(() => {
+    const initializeServices = async () => {
+      await loadGoogleMaps();
+      autocompleteService = new google.maps.places.AutocompleteService();
+      geocodingService = new google.maps.Geocoder();
+    };
+
+    initializeServices();
+  }, []);
 
   /** Geolocation */
   const [_geoLocation, setGeoLocation] = React.useState<{
@@ -103,6 +124,7 @@ export const UserRegistration: FC<IUserRegistrationProps> = ({
   const [predictions, setPredictions] = React.useState<{ value: string }[]>([]);
   // autocomplete address with google maps api
   const handleAddressChange = (address: string) => {
+    //autocompleteService.
     const guesses = autocompleteService.getPlacePredictions(
       {
         input: address,
@@ -134,15 +156,6 @@ export const UserRegistration: FC<IUserRegistrationProps> = ({
       }
     );
   };
-
-  let autocompleteService = new AutocompleteService();
-  let geocodingService = new Geocoder();
-
-  // create new autocomplete service on component mount and try browser geolocation
-  useEffect(() => {
-    autocompleteService = new AutocompleteService();
-    geocodingService = new Geocoder();
-  }, []);
 
   const nextPage = () => {
     setPage((prev) => prev + 1);
@@ -310,6 +323,11 @@ export const UserRegistration: FC<IUserRegistrationProps> = ({
     };
   }, [currentFormValid]);
 
+  const handleRegistrationComplete = () => {
+    setRegistrationComplete(true);
+    //setRegistrationCompletes(true);
+    console.log("registration complete");
+  };
   const conditionalRender = () => {
     switch (page) {
       case 0:
@@ -711,7 +729,7 @@ export const UserRegistration: FC<IUserRegistrationProps> = ({
                     $name: formData.name,
                     $username: formData.name,
                     educationStatus: formData.educationStatus,
-                    graduationYear: formData.graduationYear.format("YYYY"),
+                    // graduationYear: formData.graduationYear.format("YYYY"),
                     major: formData.major.map((major: string) => majors[major]),
                     location: formData.location,
                     interests: formData.interests.map(
@@ -723,12 +741,12 @@ export const UserRegistration: FC<IUserRegistrationProps> = ({
                     employer: formData.employer,
                     jobTitle: formData.jobTitle,
                   });
-                  setRegistrationComplete(true);
+                  handleRegistrationComplete();
                 }}
               >
                 Looks good!
               </Button>
-              {registrationComplete && <Navigate to="/profile" />}
+              {registrationComplete && <Navigate to="/profile" replace />}
             </Space>
           </Space>
         );
