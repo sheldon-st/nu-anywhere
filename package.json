@@ -13,6 +13,7 @@
     "@geoapify/geocoder-autocomplete": "^1.5.1",
     "@geoapify/react-geocoder-autocomplete": "^1.5.0",
     "@googlemaps/js-api-loader": "^1.16.2",
+    "@happyreact/react": "^0.2.5",
     "@supabase/supabase-js": "^2.33.2",
     "@visx/group": "^3.3.0",
     "@visx/mock-data": "^3.3.0",

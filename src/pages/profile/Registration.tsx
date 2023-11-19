@@ -313,7 +313,7 @@ export const UserRegistration: FC<IUserRegistrationProps> = ({
   // call nextPage() whenever the current form is valid and the user presses enter
   useEffect(() => {
     const handleEnter = (e: KeyboardEvent) => {
-      if (e.key === "Enter" && currentFormValid) {
+      if (e.key === "Enter" && validateForm()) {
         nextPage();
       }
     };
@@ -755,8 +755,22 @@ export const UserRegistration: FC<IUserRegistrationProps> = ({
     }
   };
 
+  // the container space should be styles to take up entire screen height and cover header that it is wrapped in
   return (
-    <Space direction="vertical" size={12}>
+    <Space
+      direction="vertical"
+      size={12}
+      style={{
+        position: "absolute",
+        height: "100vh",
+        width: "100vw",
+        top: 0,
+        left: 0,
+        zIndex: 100,
+        backgroundColor: token.colorBgContainer,
+        padding: 32,
+      }}
+    >
       <Steps current={page} size="small" onChange={(e) => setPage(e)}>
         <Steps.Step title="Basics" />
         <Steps.Step
@@ -780,13 +794,13 @@ export const UserRegistration: FC<IUserRegistrationProps> = ({
             Hey there!{" "}
           </Typography.Title>
           <Typography.Title level={3} style={{ marginTop: 0 }}>
-            Before we get started, we need to get to know you a little better.
+            Before we continue, we need to get to know you a little better.
           </Typography.Title>
 
           <Typography.Paragraph>
             We know that filling out forms can be a pain, but this will help us
             make sure that you get the most out of this platform, and will only
-            take a few minutes!
+            take a couple minutes!
           </Typography.Paragraph>
           <Button onClick={() => setPage((prev) => prev + 1)} type="primary">
             Let's get started!

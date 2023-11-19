@@ -15,6 +15,7 @@ import {
   AutoComplete,
   Card,
   Descriptions,
+  Empty,
 } from "antd";
 import type { InputRef } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
@@ -80,16 +81,16 @@ export function Profile() {
 
   return (
     <>
-      {registrationComplete ? (
-        <Space direction="vertical" style={{ width: "100%" }}>
-          <Typography.Title level={2}>Welcome {user.email}</Typography.Title>
-          <Typography.Paragraph id="registration-complete">
-            This is the profile page. You can update your profile here.
-          </Typography.Paragraph>
-        </Space>
-      ) : (
-        <div>Placeholder</div>
-      )}
+      <Space direction="vertical" style={{ width: "100%" }}>
+        <Empty
+          description={
+            <Typography.Title level={3}>
+              The profile page is currently under construction. This is where
+              you would be able to see your profile and edit it.
+            </Typography.Title>
+          }
+        />
+      </Space>
     </>
   );
 }

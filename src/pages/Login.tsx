@@ -4,6 +4,8 @@ import { Session } from "@supabase/supabase-js";
 import { Button } from "antd";
 import posthog from "posthog-js";
 
+import { Typography, Space } from "antd";
+
 export function LoginPage() {
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState("");
@@ -86,13 +88,24 @@ export function LoginPage() {
   return (
     <>
       {!session ? (
-        <div className="row flex flex-center">
+        <div
+          className="row flex flex-center"
+          style={{
+            position: "absolute",
+            height: "100vh",
+            width: "100vw",
+            top: 0,
+            left: 0,
+            zIndex: 100,
+            backgroundColor: "white",
+            padding: 32,
+          }}
+        >
           <div className="col-6 form-widget">
-            <h1 className="header">Supabase + React</h1>
-            <p className="description">
-              Sign in via magic link with your email below
-            </p>
-            <form className="form-widget" onSubmit={handleLogin}>
+            <Typography.Title level={2}>
+              First things first, let's get you connected!
+            </Typography.Title>
+            {/*  <form className="form-widget" onSubmit={handleLogin}>
               <div>
                 <input
                   className="inputField"
@@ -112,8 +125,10 @@ export function LoginPage() {
                   )}
                 </button>
               </div>
-            </form>
-            <Button onClick={signInWithAzure}>Sign in with Azure</Button>
+            </form> */}
+            <Button onClick={signInWithAzure}>
+              Log in with Northeastern SSO
+            </Button>
           </div>
         </div>
       ) : (

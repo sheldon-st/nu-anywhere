@@ -25,16 +25,12 @@ function MainNavigation() {
     }, */
 
     {
-      label: <NavLink to="/documents">Documents</NavLink>,
-      key: "documents",
+      label: <NavLink to="/events">Events</NavLink>,
+      key: "events",
     },
     {
-      label: <NavLink to="/budget">DoD Budget</NavLink>,
-      key: "budget",
-    },
-    {
-      label: <NavLink to="/agency">Agencies</NavLink>,
-      key: "agency",
+      label: <NavLink to="/connections">Connections</NavLink>,
+      key: "connections",
     },
 
     {
