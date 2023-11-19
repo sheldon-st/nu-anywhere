@@ -48,6 +48,9 @@ export function LoginPage() {
       console.log(err);
     }
 
+    console.log("redirectUrl");
+    console.log(redirectUrl);
+
     const { data, error } = await supabase.auth
       .signInWithOAuth({
         provider: "azure",
