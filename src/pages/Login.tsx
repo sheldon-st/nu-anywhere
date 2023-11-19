@@ -37,10 +37,8 @@ export function LoginPage() {
 
   async function signInWithAzure() {
     posthog.capture("attempt sso login", { property: "sso attempted" });
-    const redirectUrl =
-      process.env.CONTEXT === "production"
-        ? "https://nuanywhere.uiby.me/register"
-        : "http://localhost:3000/register";
+    let redirectUrl = window.location.origin + "/register";
+
     const { data, error } = await supabase.auth
       .signInWithOAuth({
         provider: "azure",
