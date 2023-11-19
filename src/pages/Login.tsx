@@ -39,6 +39,15 @@ export function LoginPage() {
     posthog.capture("attempt sso login", { property: "sso attempted" });
     let redirectUrl = window.location.origin + "/register";
 
+    // if process env is available and context is production, use https://nuanywhere.uiby.me/register (in dev mode process is undefined so check for that to avoid errors)
+    try {
+      if (process.env.NODE_ENV === "production") {
+        redirectUrl = "https://nuanywhere.uiby.me/register";
+      }
+    } catch (err) {
+      console.log(err);
+    }
+
     const { data, error } = await supabase.auth
       .signInWithOAuth({
         provider: "azure",
