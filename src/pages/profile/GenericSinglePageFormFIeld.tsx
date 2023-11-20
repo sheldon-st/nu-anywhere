@@ -13,10 +13,10 @@ import { Button, Input, Steps, Space, Form, Typography } from "antd";
  */
 
 interface GenericSinglePageFormProps {
-  formData: any;
-  setFormData: any;
-  next: any;
-  prev: any;
+  formData?: any;
+  setFormData?: any;
+  next?: any;
+  prev?: any;
   title: string;
   description: string;
   formItems: any;

@@ -19,7 +19,8 @@ import { AgencyDetail } from "./pages/agencies/AgencyDetail";
 import { DocumentDetail } from "./pages/documents/DocumentDetail";
 import { AgencyHome } from "./pages/agencies/AgencyHome";
 import UserRegistration from "./pages/profile/Registration";
-
+import { EventsHome } from "./pages/events/EventsHome";
+import CreateEvent from "./pages/events/CreateEvent";
 function App() {
   return (
     <BrowserRouter>
@@ -38,6 +39,8 @@ function App() {
             <Routes>
               <Route path="/" element={<WelcomePage />} />
               <Route path="/login" element={<Login />} />
+              <Route path="/events" element={<EventsHome />} />
+              <Route path="/events/create" element={<CreateEvent />} />
               {/* <Route path="/budget">
                 <Route index element={<BudgetHome />} />
                 <Route path="search" element={<SearchResults />} />

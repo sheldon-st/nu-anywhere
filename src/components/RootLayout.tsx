@@ -119,7 +119,7 @@ const RootLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
         type="warning"
         style={{ marginBottom: 16 }}
         action={
-          <Button size="small" type="primary" onClick={showModal}>
+          <Button size="small" type="link" onClick={showModal}>
             Give Feedback
           </Button>
         }
