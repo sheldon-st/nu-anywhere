@@ -30,7 +30,7 @@ import posthog from "posthog-js";
 import { useNavigate, Navigate } from "react-router-dom";
 
 const loader = new Loader({
-  apiKey: "AIzaSyApOv8j1GSr09SLkdAEWObBHkleWvAGB1U",
+  apiKey: import.meta.env.GOOGLE_API_KEY,
   version: "weekly",
   libraries: ["places", "geocoding"],
 });
