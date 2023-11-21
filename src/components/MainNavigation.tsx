@@ -49,7 +49,7 @@ function MainNavigation() {
     items.pop();
     // add create listing
     items.push({
-      label: <NavLink to="/contribute">Contribute</NavLink>,
+      label: <NavLink to="/contribute"></NavLink>,
       key: "contribute",
       style: { marginLeft: "auto" },
     });

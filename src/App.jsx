@@ -12,7 +12,7 @@ import { AuthProvider } from "./hooks/Auth";
 import Profile from "./pages/Profile";
 import SearchResults from "./pages/budget/Results";
 import { BudgetHome } from "./pages/BudgetHome";
-import { ConfigProvider } from "antd";
+import { ConfigProvider, Empty } from "antd";
 import ContributePage from "./pages/Contribute";
 import { DocumentsHome } from "./pages/documents/DocumentsHome";
 import { AgencyDetail } from "./pages/agencies/AgencyDetail";
@@ -40,6 +40,12 @@ function App() {
               <Route path="/" element={<WelcomePage />} />
               <Route path="/login" element={<Login />} />
               <Route path="/events" element={<EventsHome />} />
+              <Route
+                path="/connections"
+                element={
+                  <Empty description="The connections page is currently under construction" />
+                }
+              />
               <Route path="/events/create" element={<CreateEvent />} />
               {/* <Route path="/budget">
                 <Route index element={<BudgetHome />} />
@@ -87,14 +93,14 @@ function App() {
                   </ProtectedRoute>
                 }
               />
-              <Route
+              {/* <Route
                 path="/contribute"
                 element={
                   <ProtectedRoute>
                     <ContributePage />
                   </ProtectedRoute>
                 }
-              />
+              /> */}
             </Routes>
           </RootLayout>
         </ConfigProvider>

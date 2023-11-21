@@ -17,6 +17,9 @@ import {
   Menu,
   Button,
   Alert,
+  Modal,
+  Popconfirm,
+  message,
 } from "antd";
 import {
   QuestionCircleOutlined,
@@ -51,6 +54,8 @@ export const EventsHome: FC = () => {
     setLoading(false);
   }, []);
 
+  const [modalVisible, setModalVisible] = useState(false);
+
   return (
     <Layout style={{ backgroundColor: "white", gap: "16px" }}>
       <Layout.Sider width={300} theme="light">
@@ -61,7 +66,13 @@ export const EventsHome: FC = () => {
           mode="inline"
         >
           <Menu.Item key="1">All Events</Menu.Item>
-          <Menu.Item key="2">My Events</Menu.Item>
+          <Menu.Item
+            disabled
+            key="2"
+            title="'My Events' is currently under development."
+          >
+            My Events
+          </Menu.Item>
         </Menu>
       </Layout.Sider>
       <Layout.Content style={{ backgroundColor: "white" }}>
@@ -87,7 +98,18 @@ export const EventsHome: FC = () => {
                   onClick={() => handleEventClick(event)}
                   actions={[
                     // <NavLink to={`#`}>View Details</NavLink>,
-                    <NavLink to={`#`}>Register</NavLink>,
+                    <Popconfirm
+                      title="Are you sure you can make it?"
+                      onConfirm={() => {
+                        message.success("Registered for event!");
+                        setModalVisible(false);
+                      }}
+                      onCancel={() => setModalVisible(false)}
+                      okText="Yes"
+                      cancelText="No"
+                    >
+                      <Button type="link">Register</Button>
+                    </Popconfirm>,
                   ]}
                   style={{ textAlign: "left" }}
                   // size="small"
