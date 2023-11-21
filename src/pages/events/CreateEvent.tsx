@@ -12,12 +12,13 @@ import {
   AutoComplete,
   Card,
   Descriptions,
+  message,
 } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 import { majors, interests } from "../../types";
 import { Loader } from "@googlemaps/js-api-loader";
 import posthog from "posthog-js";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Navigate } from "react-router-dom";
 import { GenericSinglePageForm } from "../profile/GenericSinglePageFormFIeld";
 const { RangePicker } = DatePicker;
 const { CheckableTag } = Tag;
@@ -69,7 +70,9 @@ export const CreateEvent: FC = ({}) => {
 
   const handleRegistrationComplete = () => {
     setRegistrationComplete(true);
+
     console.log("registration complete");
+    message.success("Event created!");
   };
 
   const inputFieldStyle = {
@@ -127,39 +130,87 @@ export const CreateEvent: FC = ({}) => {
         );
       case 2:
         return (
-          <Space direction="vertical" size={12}>
-            <Form.Item
-              label="Attendees"
-              name="attendees"
-              rules={[{ required: true }]}
-            >
-              <Select mode="tags" />
-            </Form.Item>
+          <Space direction="vertical" style={{ width: "50%" }}>
+            <GenericSinglePageForm
+              title="When is your event?"
+              description="This is the date and time your event will take place."
+              formItems={
+                <DatePicker
+                  id="date"
+                  type="text"
+                  required
+                  value={formData.date}
+                  onChange={(e) => setFormData({ ...formData, date: e })}
+                  style={inputFieldStyle}
+                  placeholder="i.e. Thursday, 4/15/2024"
+                />
+              }
+            />
           </Space>
         );
       case 3:
         return (
-          <Space direction="vertical" size={12}>
-            <Form.Item
-              label="Visibility"
-              name="visibility"
-              rules={[{ required: true }]}
-            >
-              <Select>
-                <Select.Option value="public">Public</Select.Option>
-                <Select.Option value="private">Private</Select.Option>
-              </Select>
-            </Form.Item>
-            <Form.Item label="ID" name="id" rules={[{ required: true }]}>
-              <Input />
-            </Form.Item>
-            <Form.Item
-              label="Motivation"
-              name="motivation"
-              rules={[{ required: true }]}
-            >
-              <Input.TextArea />
-            </Form.Item>
+          <Space direction="vertical" style={{ width: "50%" }}>
+            <GenericSinglePageForm
+              title="Where is your event?"
+              description="This is the location of your event."
+              formItems={
+                <Input
+                  id="location"
+                  type="text"
+                  required
+                  value={formData.location}
+                  onChange={(e) =>
+                    setFormData({ ...formData, location: e.target.value })
+                  }
+                  style={inputFieldStyle}
+                  placeholder="i.e. 123 Main Street, San Francisco, CA"
+                />
+              }
+            />
+          </Space>
+        );
+      case 4:
+        return (
+          <Space direction="vertical" style={{ width: "50%" }}>
+            <GenericSinglePageForm
+              title="Who should be able to see your event?"
+              description="This is the visibility of your event."
+              formItems={
+                <Select
+                  id="visibility"
+                  type="text"
+                  required
+                  value={formData.visibility}
+                  onChange={(e) => setFormData({ ...formData, visibility: e })}
+                  style={inputFieldStyle}
+                  placeholder="i.e. Public"
+                >
+                  <Select.Option value="public">Everyone</Select.Option>
+                  <Select.Option value="private">
+                    Just my connections
+                  </Select.Option>
+                </Select>
+              }
+            />
+          </Space>
+        );
+      case 5:
+        return (
+          <Space direction="vertical" style={{ width: "50%" }}>
+            <GenericSinglePageForm
+              title="Nice! The review page for events is still under construction but this is where you would check out the details "
+              description=""
+              formItems={
+                <div>
+                  <Button type="primary" onClick={handleRegistrationComplete}>
+                    Looks good!
+                  </Button>
+                  <pre>{JSON.stringify(formData, null, 2)}</pre>
+                  <pre>{currentFormValid}</pre>
+                </div>
+              }
+            />
           </Space>
         );
       default:
@@ -176,10 +227,12 @@ export const CreateEvent: FC = ({}) => {
       }}
     >
       <Steps current={page} size="small" onChange={(e) => setPage(e)}>
-        <Steps.Step title="Event Details" />
+        <Steps.Step title="Event Name" />
+        <Steps.Step title="Description" />
+        <Steps.Step title="Date" />
         <Steps.Step title="Location" />
-        <Steps.Step title="Attendees" />
         <Steps.Step title="Visibility" />
+        <Steps.Step title="Review" />
       </Steps>
 
       {conditionalRender()}
@@ -194,6 +247,11 @@ export const CreateEvent: FC = ({}) => {
           <Button onClick={nextPage} disabled={!validateForm()}>
             Next
           </Button>
+        </div>
+      )}
+      {registrationComplete && (
+        <div>
+          <Navigate to="/events" />
         </div>
       )}
 
