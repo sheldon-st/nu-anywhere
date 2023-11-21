@@ -169,9 +169,8 @@ export const UserRegistration: FC<IUserRegistrationProps> = ({
       case 1:
         if (formData.educationStatus === "yes") {
           return (
-            formData.graduationYear !== "" &&
-            formData.major.length !== 0 &&
-            formData.major.every((major: string) => majors[major])
+            formData.graduationYear !== "" && formData.major.length !== 0
+            // formData.major.every((major: string) => majors[major])
           );
         } else if (formData.educationStatus === "no") {
           return true;
@@ -424,7 +423,7 @@ export const UserRegistration: FC<IUserRegistrationProps> = ({
                       style={inputFieldStyle}
                       onChange={(e) => setFormData({ ...formData, major: e })}
                       status={formData.major ? "" : "error"}
-                      mode="multiple"
+                      mode="tags"
                       filterOption={filterOption}
                       options={Object.keys(majors).map((major) => ({
                         label: majors[major],
@@ -496,8 +495,7 @@ export const UserRegistration: FC<IUserRegistrationProps> = ({
             )}
 
             {formData.employmentStatus === "yes" &&
-              (formData.employmentType === "coop" ||
-                formData.employmentType === "internship") && (
+              formData.employmentType !== "" && (
                 <GenericSinglePageForm
                   formData={formData}
                   setFormData={setFormData}
