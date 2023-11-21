@@ -30,7 +30,7 @@ import posthog from "posthog-js";
 import { useNavigate, Navigate } from "react-router-dom";
 
 const loader = new Loader({
-  apiKey: import.meta.env.GOOGLE_API_KEY,
+  apiKey: import.meta.env.VITE_GOOGLE_API_KEY,
   version: "weekly",
   libraries: ["places", "geocoding"],
 });
@@ -192,7 +192,7 @@ export const UserRegistration: FC<IUserRegistrationProps> = ({
           return false;
         }
       case 3:
-        return formData.location !== "";
+        return true;
       case 4:
         return formData.interests.length >= 3;
       default:
